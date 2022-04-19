@@ -1,0 +1,23 @@
+server:
+    port: 8080
+spring:
+    application:
+        name: e-learning
+    datasource:
+        username: 'root'
+        password: 'admin'
+        #url: mysql
+        url: jdbc:mysql://localhost:3306/elearning?createDatabaseIfNotExist=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jackson:
+        serialization: 
+            fail-on-empty-beans: false
+    jpa: 
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                format_sql: true
+        show-sql: true
+        generate-ddl: true
