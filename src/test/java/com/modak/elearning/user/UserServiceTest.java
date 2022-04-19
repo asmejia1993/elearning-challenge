@@ -7,20 +7,20 @@ import com.modak.elearning.lesson.Lesson;
 import com.modak.elearning.lessoncategory.LessonCategory;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+@MockitoSettings(strictness = Strictness.LENIENT)
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
@@ -28,12 +28,7 @@ class UserServiceTest {
     private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
-
-    // @BeforeEach
-    // void setUp() {
-    //     userService = new UserService(userRepository);
-    // }
-    
+ 
     @Test
     @DisplayName("Should create user")
     void shouldCreateUser() {
@@ -61,7 +56,7 @@ class UserServiceTest {
                                             .lastName("Wick")
                                             .nickName("john77")
                                             .build();
-        
+       
         given(userRepository.saveAndFlush(user)).willReturn(user);
         User savedUser = userService.createUser(userRequest);
         
