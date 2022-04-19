@@ -27,14 +27,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public User getLessonByUser(@PathVariable Long id) {
+    public LessonByUserDTO getLessonByUser(@PathVariable Long id) {
         return userService.getLessonByUser(id);
     }
 
     @GetMapping
     @ResponseBody
     public List<User> findAllUser() {
-        
         return userService.findAllUsers();
     }
 }

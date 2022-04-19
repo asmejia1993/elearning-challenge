@@ -2,6 +2,10 @@ package com.modak.elearning.user;
 
 import java.util.List;
 
+import com.modak.elearning.lesson.Lesson;
+import com.modak.elearning.lesson.LessonRepository;
+import com.modak.elearning.lesson.PartialLessonDTO;
+
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
     
     private final UserRepository userRepository;
+    private final LessonRepository lessonRepository;
 
     /**
      * Create a new user
@@ -38,8 +43,21 @@ public class UserService {
      * @param id
      * @return User
      */
-    public User getLessonByUser(Long id) {
-        return userRepository.getById(id);
+    public LessonByUserDTO getLessonByUser(Long id) {
+
+        User user = userRepository.getById(id);
+        List<PartialLessonDTO> partialLessonDTO = lessonRepository.findByUser(user)
+                                                .stream()
+                                                .map(x ->
+                                                    PartialLessonDTO.builder()
+                                                        .id(x.getId())
+                                                        .lessonCategory(x.getLessonCategory())
+                                                        .build())
+                                                .toList();
+        return LessonByUserDTO.builder()
+                    .user(user)
+                    .lessons(partialLessonDTO)
+                    .build();
     }
 
     /**
