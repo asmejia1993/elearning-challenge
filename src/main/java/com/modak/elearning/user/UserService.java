@@ -2,7 +2,6 @@ package com.modak.elearning.user;
 
 import java.util.List;
 
-import com.modak.elearning.lesson.Lesson;
 import com.modak.elearning.lesson.LessonRepository;
 import com.modak.elearning.lesson.PartialLessonDTO;
 

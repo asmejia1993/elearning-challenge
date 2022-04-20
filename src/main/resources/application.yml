@@ -4,10 +4,10 @@ spring:
     application:
         name: e-learning
     datasource:
-        username: 'root'
-        password: 'admin'
-        #url: mysql
-        url: jdbc:mysql://localhost:3306/elearning?createDatabaseIfNotExist=true
+        #username: 'root'
+        #password: 'admin'
+        url: jdbc:mysql://dbsql:3306/elearning?useSSL=false
+        #url: jdbc:mysql://localhost:3306/elearning?createDatabaseIfNotExist=true
         driver-class-name: com.mysql.cj.jdbc.Driver
     jackson:
         serialization: 

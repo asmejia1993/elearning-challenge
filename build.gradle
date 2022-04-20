@@ -1,3 +1,9 @@
+buildscript {
+	dependencies {
+		classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -5,7 +11,7 @@ plugins {
 }
 
 group = 'com.modak'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -34,4 +40,15 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// docker: plugin apply  
+apply plugin: 'com.palantir.docker'
+
+// docker: new task docker 
+docker {
+    dependsOn build
+    name "${project.name}"
+    files bootJar.archivePath
+    buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 }
